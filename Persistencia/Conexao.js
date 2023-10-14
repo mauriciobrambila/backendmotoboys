@@ -9,7 +9,7 @@ export default async function conectar() {
     host: "localhost",
     user: "aluno45-pfsii",
     porta: 3306,
-    password: "ll1Rgg5y1Qj365Zxpn4Y",
+    password: "fpGTOEzP6gKi6eJE9JiA",
     database: "motoboys",
    });
 
