@@ -18,5 +18,5 @@ app.use('/pedidos', rotaPedido);
 //});
 
 app.listen(4045, '0.0.0.0', ()=>{
-    console.log("Backend ouvindo em http://localhost:4045")
+    console.log("Backend ouvindo em 127.0.0.1:4045")
 });
