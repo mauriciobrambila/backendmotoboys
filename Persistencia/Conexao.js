@@ -13,6 +13,7 @@ export default async function conectar() {
     database: "motoboys",
    });
 
+   
    //LOCAL
   //const conexao = await mysql.createConnection({
        // host: "localhost",
