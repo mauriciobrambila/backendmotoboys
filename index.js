@@ -13,10 +13,16 @@ app.use('/motoboys', rotaMotoboy);
 app.use('/entrega', rotaEntrega);
 app.use('/pedidos', rotaPedido);
 
+const hostname = "localhost";
+const porta = "4045";
+
+app.listen(porta, hostname, () => {
+    console.log(`API rodando em: https://${hostname}:${porta}/motoboys`)  })
+
 //app.listen(3000, "localhost", ()=>{
 //    console.log("Rodando em http://localhost:3000/motoboys")
-//});
+//})
 
 app.listen(4045, '0.0.0.0', ()=>{
-    console.log("Backend ouvindo em 127.0.0.1:4045")
-});
+    console.log("Backend ouvindo em http://localhost:4045")
+})
