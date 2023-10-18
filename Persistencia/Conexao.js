@@ -8,7 +8,7 @@ export default async function conectar() {
   const conexao = await mysql.createConnection({
     host:"localhost",
     user: "aluno45-pfsii",
-    password: "",
+    password: "aluno45-pfsii",
     database: "motoboys"
    });
 
