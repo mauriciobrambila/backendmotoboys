@@ -22,7 +22,3 @@ app.listen(porta, hostname, () => {
 //app.listen(3000, "localhost", ()=>{
 //    console.log("Rodando em http://localhost:3000/motoboys")
 //})
-
-//app.listen(4045, '0.0.0.0', ()=>{
-//   console.log("Backend ouvindo em http://localhost:4045")
-//})
