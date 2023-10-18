@@ -5,21 +5,21 @@ export default async function conectar() {
     return global.conexao;
   }
 
- // const conexao = await mysql.createConnection({
-  //  host: "localhost",
-  //  user: "aluno45-pfsii",
-  //  porta: 3306,
-  //  password: "fpGTOEzP6gKi6eJE9JiA",
-  //  database: "motoboys",
-  // });
+  const conexao = await mysql.createConnection({
+    host:"127.0.0.1",
+    user: "aluno45-pfsii",
+    porta: 3306,
+    password: "aluno45-pfsii",
+    database: "motoboys",
+   });
 
    //LOCAL
-  const conexao = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "aluno45-pfsii",
-        database: "motoboys"
-      });
+  //const conexao = await mysql.createConnection({
+       // host: "localhost",
+     //   user: "root",
+      //  password: "aluno45-pfsii",
+     //   database: "motoboys"
+     // });
     
       global.conexao = conexao;
       return conexao;

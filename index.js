@@ -13,10 +13,10 @@ app.use('/motoboys', rotaMotoboy);
 app.use('/entrega', rotaEntrega);
 app.use('/pedidos', rotaPedido);
 
-app.listen(3000, "localhost", ()=>{
-    console.log("Rodando em http://localhost:3000/motoboys")
-});
-
-//app.listen(4045, '0.0.0.0', ()=>{
-   // console.log("Backend ouvindo em http://localhost:4045")
+//app.listen(3000, "localhost", ()=>{
+//    console.log("Rodando em http://localhost:3000/motoboys")
 //});
+
+app.listen(4045, '0.0.0.0', ()=>{
+    console.log("Backend ouvindo em http://localhost:4045")
+});
