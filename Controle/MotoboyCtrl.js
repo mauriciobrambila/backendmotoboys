@@ -20,7 +20,7 @@ export default class MotoboyCTRL{
                     resposta.status(200).json({
                         status:true,
                         Código: motoboy.codigo,
-                        mensagem: "Motoboy gravado com sucesso!!"
+                        mensagem: "Doador gravado com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({

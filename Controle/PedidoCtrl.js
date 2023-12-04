@@ -12,7 +12,7 @@ export default class PedidoCTRL{
                 pedido.gravar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Pedido registrado!" + 
+                        mensagem: "Valor registrado!" + 
                                     "\n Código: " + pedido.codigo
                     });
                 }).catch((erro) => {

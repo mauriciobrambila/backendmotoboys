@@ -24,7 +24,7 @@ export default class EntregaCTRL{
             entrega.gravar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Entregue com sucesso!!" + "\ Registro: " + entrega.registro
+                        mensagem: "Cadastrado com sucesso!!" + "\ Registro: " + entrega.registro
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -101,7 +101,7 @@ export default class EntregaCTRL{
                 entrega.removerDoBancoDados().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Entrega excluída com sucesso!!"
+                        mensagem: "Excluído com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
