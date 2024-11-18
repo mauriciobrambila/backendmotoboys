@@ -1,8 +1,8 @@
-import Entrada from '../Modelo/Entrada.js'; 
-import Hosp from '../Modelo/Hosp.js';
-import Hospede from '../Modelo/Hospede.js';
+import Entrega from '../Modelo/Entrega.js'; 
+import Moto from '../Modelo/Moto.js';
+import Motoboy from '../Modelo/Motoboy.js';
 
-export default class EntradaCTRL{
+export default class EntregaCTRL{
    
     gravar(requisiçao, resposta){
         resposta.type("application/json");
@@ -12,19 +12,19 @@ export default class EntradaCTRL{
             const data = dados.data;
             const horaEntrada = dados.horaEntrada;
             const horaSaida = dados.horaSaida;
-            const hospedes = dados.hospedes;
-            const listaHospedes = []
-            for(const row of hospedes){
-                const hospede = new Hospede(row.hospede.codigo);
-                const hosp = new Hosp(hospede);
-                listaHospedes.push(hosp);
+            const motoboys = dados.motoboys;
+            const listaMotoboys = []
+            for(const row of motoboys){
+                const motoboy = new Motoboy(row.motoboy.codigo);
+                const moto = new Moto(motoboy);
+                listaMotoboys.push(moto);
             }
             
-            const entrada = new Entrada(0, data, horaEntrada, horaSaida, listaHospedes);
-            entrada.gravar().then(()=>{
+            const entrega = new Entrega(0, data, horaEntrada, horaSaida, listaMotoboys);
+            entrega.gravar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Cadastrado com sucesso!!" + "\ Registro: " + entrada.registro
+                        mensagem: "Entregue com sucesso!!" + "\ Registro: " + entrega.registro
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -36,7 +36,7 @@ export default class EntradaCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe adequadamente todos os dados para a entrada conforme a documentação da API"
+                    mensagem:"Informe adequadamente todos os dados para a entrega conforme a documentação da API"
                 });
             }
     }
@@ -50,42 +50,42 @@ export default class EntradaCTRL{
             const data = dados.data;
             const horaEntrada = dados.horaEntrada;
             const horaSaida = dados.horaSaida;
-            const hospedes = dados.hospedes;
+            const motoboys = dados.motoboys;
 
             if(registro && data && horaEntrada && horaSaida) {
-                const entrada = new Entrada(registro, data, horaEntrada, horaSaida);
-                const listaHospedes = [];
-                for (const row of hospedes) {
-                  const hospede = new Hospede(row.hospede.codigo);
-                  const hosp = new Hosp(hospede);
-                  listaHospedes.push(hosp);
+                const entrega = new Entrega(registro, data, horaEntrada, horaSaida);
+                const listaMotoboys = [];
+                for (const row of motoboys) {
+                  const motoboy = new Motoboy(row.motoboy.codigo);
+                  const moto = new Moto(motoboy);
+                  listaMotoboys.push(moto);
                 }
-                entrada.listaHospedes = listaHospedes;
+                entrega.listaMotoboys = listaMotoboys;
 
 
-                entrada.atualizar().then(()=>{
+                entrega.atualizar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Entrada atualizada com sucesso!!"
+                        mensagem: "Entrega atualizada com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
                         status:false,
                         mensagem: erro.message
                     })
-                });       
+                });
             }
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe adequadamente todos os dados para a entrada conforme a documentação da API"
+                    mensagem:"Informe adequadamente todos os dados para a entrega conforme a documentação da API"
                 });
             }
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou entrada no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou entrega no formato JSON não fornecido! Consulte a documentação da API"
             });
         }
     }
@@ -97,11 +97,11 @@ export default class EntradaCTRL{
             const dados = requisiçao.body;
             const registro = dados.registro;
             if(registro){
-                const entrada = new Entrada(registro);
-                entrada.removerDoBancoDados().then(()=>{
+                const entrega = new Entrega(registro);
+                entrega.removerDoBancoDados().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Excluído com sucesso!!"
+                        mensagem: "Entrega excluída com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -113,14 +113,14 @@ export default class EntradaCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe o registro da entrada conforme a documentação da API"
+                    mensagem:"Informe o registro da entrega conforme a documentação da API"
                 });
             }
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou entrada no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou entrega no formato JSON não fornecido! Consulte a documentação da API"
             });
         }
     }
@@ -129,16 +129,16 @@ export default class EntradaCTRL{
         resposta.type("application/json");
 
         if(requisiçao.method === "GET"){
-                const entrada = new Entrada();
-                entrada.consultar().then((entradas)=>{
-                    resposta.status(200).json(entradas);
+                const entrega = new Entrega();
+                entrega.consultar().then((entregas)=>{
+                    resposta.status(200).json(entregas);
                 }).catch((erro) => {
                     resposta.status(500).json({
                         status:false,
                         mensagem: erro.message
                     })
                 });
-            }     
+            }
         else{
             resposta.status(400).json({ 
                 status:false,

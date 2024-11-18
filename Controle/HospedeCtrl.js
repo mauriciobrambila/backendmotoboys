@@ -1,6 +1,6 @@
-import Telefone from '../Modelo/Telefone.js';
-import Hospede from '../Modelo/Hospede.js'; 
-export default class HospedeCTRL{
+import Pedido from '../Modelo/Pedido.js';
+import Motoboy from '../Modelo/Motoboy.js'; 
+export default class MotoboyCTRL{
 
     gravar(requisiçao, resposta){
         resposta.type("application/json");
@@ -10,17 +10,17 @@ export default class HospedeCTRL{
             const nome = dados.nome;
             const endereco = dados.endereco;
             const cpf = dados.cpf; 
-            const fone = dados.fone;
+            const telefone = dados.telefone;
             const dataCadastro = dados.dataCadastro;
-            const codTelefone = dados.codTelefone;
-            const telefone = new Telefone(0,"").consultarCodigo(codTelefone).then((telefone)=>{
-                if(telefone){
-                    const hospede = new Hospede(0, nome, endereco, cpf, fone, dataCadastro, codTelefone);
-                    hospede.gravar().then(()=>{
+            const codPedido = dados.codPedido;
+            const pedido = new Pedido(0,"").consultarCodigo(codPedido).then((pedido)=>{
+                if(pedido){
+                    const motoboy = new Motoboy(0, nome, endereco, cpf, telefone, dataCadastro, codPedido);
+                    motoboy.gravar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        Código: hospede.codigo,
-                        mensagem: "Hospede gravado com sucesso!!"
+                        Código: motoboy.codigo,
+                        mensagem: "Motoboy gravado com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -32,14 +32,14 @@ export default class HospedeCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Telefone não encontrado!"
+                    mensagem:"Pedido não encontrado!"
                 });
             }})
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou telefone no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou motoboy no formato JSON não fornecido! Consulte a documentação da API"
             });
             }
     }
@@ -53,17 +53,18 @@ export default class HospedeCTRL{
             const nome = dados.nome;
             const endereco = dados.endereco;
             const cpf = dados.cpf;
-            const fone = dados.fone;
+          
+            const telefone = dados.telefone;
             const dataCadastro = dados.dataCadastro;
-            const codTelefone = dados.codTelefone;
-            const telefone = new Telefone(0,"").consultar(codTelefone).then((telefone)=>{
-                if(telefone){
-                    const hospede = new Hospede(codigo, nome, endereco, cpf, fone, dataCadastro, codTelefone);
-                    hospede.atualizar().then(()=>{
+            const codPedido = dados.codPedido;
+            const pedido = new Pedido(0,"").consultar(codPedido).then((pedido)=>{
+                if(pedido){
+                    const motoboy = new Motoboy(codigo, nome, endereco, cpf, telefone, dataCadastro, codPedido);
+                    motoboy.atualizar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        Código: hospede.codigo,
-                        mensagem: "Hospede atualizado com sucesso!!"
+                        Código: motoboy.codigo,
+                        mensagem: "Motoboy atualizado com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -75,14 +76,14 @@ export default class HospedeCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Telefone não encontrado!"
+                    mensagem:"Pedido não encontrado!"
                 });
             }})
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou hospede no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou motoboy no formato JSON não fornecido! Consulte a documentação da API"
             });
             }
     }
@@ -94,11 +95,11 @@ export default class HospedeCTRL{
             const dados = requisiçao.body;
             const codigo = dados.codigo;
             if(codigo){
-                const hospede = new Hospede(codigo);
-                hospede.removerDoBancoDados().then(()=>{
+                const motoboy = new Motoboy(codigo);
+                motoboy.removerDoBancoDados().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Hospede excluído com sucesso!!"
+                        mensagem: "Motoboy excluído com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -110,14 +111,14 @@ export default class HospedeCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe codigo do Hospede conforme a documentação da API"
+                    mensagem:"Informe codigo do Motoboy conforme a documentação da API"
                 });
             }
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou hospede no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou motoboy no formato JSON não fornecido! Consulte a documentação da API"
             });
         }
     }
@@ -126,9 +127,9 @@ export default class HospedeCTRL{
         resposta.type("application/json");
 
         if(requisiçao.method === "GET"){
-                const hospede = new Hospede();
-                hospede.consultar('').then((hospedes)=>{
-                    resposta.status(200).json(hospedes);
+                const motoboy = new Motoboy();
+                motoboy.consultar('').then((motoboys)=>{
+                    resposta.status(200).json(motoboys);
                 }).catch((erro) => {
                     resposta.status(500).json({
                         status:false,

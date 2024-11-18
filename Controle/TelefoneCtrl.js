@@ -1,5 +1,5 @@
-import Telefone from '../Modelo/Telefone.js'; 
-export default class TelefoneCTRL{
+import Pedido from '../Modelo/Pedido.js'; 
+export default class PedidoCTRL{
 
     gravar(requisiçao, resposta){
         resposta.type("application/json");
@@ -8,12 +8,12 @@ export default class TelefoneCTRL{
             const dados = requisiçao.body;
             const descricao = dados.descricao;
             if(descricao){
-                const telefone = new Telefone(0, descricao);
-                telefone.gravar().then(()=>{
+                const pedido = new Pedido(0, descricao);
+                pedido.gravar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Telefone registrado!" + 
-                                    "\n Código: " + telefone.codigo
+                        mensagem: "Pedido registrado!" + 
+                                    "\n Código: " + pedido.codigo
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -25,14 +25,14 @@ export default class TelefoneCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe adequadamente todos os dados do telefone conforme a documentação da API"
+                    mensagem:"Informe adequadamente todos os dados da pedido conforme a documentação da API"
                 });
             }
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou telefone no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou pedido no formato JSON não fornecido! Consulte a documentação da API"
             });
         }
     }
@@ -42,15 +42,15 @@ export default class TelefoneCTRL{
 
         if(requisiçao.method === "PUT" && requisiçao.is('application/json')){
             const dados = requisiçao.body;
-            const codigoTel = dados.codigoTel;
+            const codigoPed = dados.codigoPed;
             const descricao = dados.descricao;
            
-            if(codigoTel && descricao){
-                const telefone = new Telefone(codigoTel, descricao);
-                telefone.atualizar().then(()=>{
+            if(codigoPed && descricao){
+                const pedido = new Pedido(codigoPed, descricao);
+                pedido.atualizar().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Telefone atualizado com sucesso!!"
+                        mensagem: "Pedido atualizado com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -62,14 +62,14 @@ export default class TelefoneCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe adequadamente todos os dados do telefone conforme a documentação da API"
+                    mensagem:"Informe adequadamente todos os dados da pedido conforme a documentação da API"
                 });
             }
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou telefone no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou pedido no formato JSON não fornecido! Consulte a documentação da API"
             });
         }
     }
@@ -79,13 +79,13 @@ export default class TelefoneCTRL{
 
         if(requisiçao.method === "DELETE" && requisiçao.is('application/json')){
             const dados = requisiçao.body;
-            const codigoTel = dados.codigoTel;
-            if(codigoTel){
-                const telefone = new Telefone(codigoTel);
-                telefone.removerDoBancoDados().then(()=>{
+            const codigoPed = dados.codigoPed;
+            if(codigoPed){
+                const pedido = new Pedido(codigoPed);
+                pedido.removerDoBancoDados().then(()=>{
                     resposta.status(200).json({
                         status:true,
-                        mensagem: "Telefone excluído com sucesso!!"
+                        mensagem: "Pedido excluído com sucesso!!"
                     });
                 }).catch((erro) => {
                     resposta.status(500).json({
@@ -97,14 +97,14 @@ export default class TelefoneCTRL{
             else{
                 resposta.status(400).json({
                     status:false,
-                    mensagem:"Informe codigo do telefone conforme a documentação da API"
+                    mensagem:"Informe codigo dapedido conforme a documentação da API"
                 });
             }
         }
         else{
             resposta.status(400).json({ 
                 status:false,
-                mensagem:"Método não permitido ou telefone no formato JSON não fornecido! Consulte a documentação da API"
+                mensagem:"Método não permitido ou pedido no formato JSON não fornecido! Consulte a documentação da API"
             });
         }
     }
@@ -113,9 +113,9 @@ export default class TelefoneCTRL{
         resposta.type("application/json");
 
         if(requisiçao.method === "GET"){
-                const telefone = new Telefone();
-                telefone.consultar('').then((telefones)=>{
-                    resposta.status(200).json(telefones);
+                const pedido = new Pedido();
+                pedido.consultar('').then((pedidos)=>{
+                    resposta.status(200).json(pedidos);
                 }).catch((erro) => {
                     resposta.status(500).json({
                         status:false,
@@ -130,4 +130,4 @@ export default class TelefoneCTRL{
             });
         }
     }
-}    
+}
