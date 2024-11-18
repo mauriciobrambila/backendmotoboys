@@ -5,15 +5,6 @@ export default async function conectar() {
     return global.conexao;
   }
 
-  //const conexao = await mysql.createConnection({
-  // host:"localhost",
-  //user: "aluno45-pfsii",
-  //password: "aluno45-pfsii",
-  //database: "motoboys"
-  //});
-
-   //LOCAL
-   
   const conexao = await mysql.createConnection({
      host: "localhost",
      user: "root",
