@@ -1,7 +1,7 @@
 {
-  "name": "bd-motoboys",
+  "name": "bd-hospedes",
   "version": "1.0.0",
-  "description": "Banco de Dados em Node.js Motoboy",
+  "description": "Banco de Dados em Node.js Hospede",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
   "keywords": [
     "bd",
     "bancodedados",
-    "motoboys"
+    "hospedes"
   ],
   "author": "Mauricio",
   "license": "ISC",

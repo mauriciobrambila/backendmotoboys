@@ -1,24 +1,22 @@
-import MotoboyBD from '../Persistencia/MotoboyBD.js';
-export default class Motoboy{
+import HospedeBD from '../Persistencia/HospedeBD.js';
+export default class Hospede{
 
     #codigo;
     #nome;
     #endereco;
     #cpf;
-   
-    #telefone;
+    #fone;
     #dataCadastro;
-    #codPedido;
+    #codTelefone;
 
-    constructor(codigo, nome, endereco, cpf, telefone, dataCadastro, codPedido){
+    constructor(codigo, nome, endereco, cpf, fone, dataCadastro, codTelefone){
         this.#codigo = codigo;
         this.#nome = nome;
         this.#endereco = endereco;
         this.#cpf = cpf;
-       
-        this.#telefone = telefone;
+        this.#fone = fone;
         this.#dataCadastro = dataCadastro;
-        this.#codPedido = codPedido
+        this.#codTelefone = codTelefone
     }
 
     get codigo(){
@@ -55,12 +53,12 @@ export default class Motoboy{
 
    
 
-    get telefone(){
-        return this.#telefone
+    get fone(){
+        return this.#fone
     }
 
-    set telefone(novoTelefone){
-        this.#telefone = novoTelefone
+    set fone(novoFone){
+        this.#fone = novoFone
     }
 
     get dataCadastro(){
@@ -71,12 +69,12 @@ export default class Motoboy{
         this.#dataCadastro = novaDataCadastro
     }
 
-    get codPedido(){
-        return this.#codPedido
+    get codTelefone(){
+        return this.#codTelefone
     }
 
-    set codPedido(novoCodPedido){
-        this.#codPedido = novoCodPedido
+    set codTelefone(novoCodTelefone){
+        this.#codTelefone = novoCodTelefone
     }
 
     toJSON(){
@@ -85,30 +83,30 @@ export default class Motoboy{
             "nome"          : this.#nome,
             "endereco"      : this.#endereco,
             "cpf"           : this.#cpf,  
-            "telefone"      : this.#telefone,
+            "fone"          : this.#fone,
             "dataCadastro"  : this.#dataCadastro,
-            "codPedido"     : this.#codPedido
+            "codTelefone"   : this.#codTelefone
         }
     }
 
     async gravar(){
-        const  motoboyBD = new MotoboyBD();
-        this.#codigo = await motoboyBD.incluir(this);
+        const  hospedeBD = new HospedeBD();
+        this.#codigo = await hospedeBD.incluir(this);
     }
 
     async atualizar(){
-        const  motoboyBD = new MotoboyBD();
-        await  motoboyBD.alterar(this);
+        const  hospedeBD = new HospedeBD();
+        await  hospedeBD.alterar(this);
     }
 
     async removerDoBancoDados(){
-        const  motoboyBD = new MotoboyBD();
-        await  motoboyBD.excluir(this);
+        const  hospedeBD = new HospedeBD();    
+        await  hospedeBD.excluir(this);
     }
 
     async consultar(termo){
-        const  motoboyBD = new MotoboyBD();
-        const  motoboys = await  motoboyBD.consultar(termo);
-        return  motoboys;
+        const  hospedeBD = new HospedeBD();
+        const  hospedes = await  hospedeBD.consultar(termo);
+        return  hospedes;
     }
 }    
